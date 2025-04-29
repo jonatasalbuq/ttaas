@@ -1,0 +1,225 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PixelPulse</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(270deg, #0f0f0f, #1a1a1a, #0f0f0f);
+      background-size: 600% 600%;
+      animation: BackgroundShift 10s ease infinite;
+      overflow-x: hidden;
+      color: white;
+    }
+    @keyframes BackgroundShift {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+    header {
+      text-align: center;
+      padding: 40px 20px 20px;
+    }
+    header h1 {
+      font-size: 3rem;
+      color: #00ffff;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    header p {
+      margin-top: 10px;
+      font-size: 1.2rem;
+      color: #ccc;
+    }
+    section.membros {
+      margin-top: 40px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: flex-start;
+    }
+    .membro {
+      display: flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 10px;
+      border-radius: 10px;
+      backdrop-filter: blur(5px);
+      width: 100%;
+      max-width: 400px;
+      cursor: pointer;
+    }
+    .membro img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-right: 15px;
+      border: 2px solid #00ffff;
+    }
+    .membro h3 {
+      font-size: 1.5rem;
+      color: #fff;
+    }
+    .news-ticker {
+      margin-top: 40px;
+      background: #222;
+      padding: 10px;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .news-ticker span {
+      display: inline-block;
+      animation: ticker 20s linear infinite;
+      font-size: 1.2rem;
+      color: #00ffff;
+    }
+    @keyframes ticker {
+      0% {transform: translateX(100%);}
+      100% {transform: translateX(-100%);}
+    }
+    @media (max-width: 600px) {
+      header h1 { font-size: 2.5rem; }
+      header p { font-size: 1rem; }
+      .membro h3 { font-size: 1.2rem; }
+    }
+    /* Popup style */
+    .popup {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+    }
+    .popup-content {
+      background: #1f1f1f;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      width: 90%;
+      max-width: 400px;
+    }
+    .popup-content a {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 20px;
+      background: #00ffff;
+      color: #000;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+    .close-btn {
+      background: red;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>PixelPulse</h1>
+    <p>Somos um grupo de amigos e colegas que gostam de interagir e jogar.</p>
+  </header>
+  <section class="membros">
+
+    <div class="membro" onclick="openPopup('Wellington')">
+      <img src="images/wellington.png" alt="Wellington">
+      <h3>Wellington</h3>
+    </div>
+
+    <div class="membro">
+      <img src="images/augusto.png" alt="Augusto">
+      <h3>Augusto</h3>
+    </div>
+
+    <div class="membro">
+      <img src="images/jooj.png" alt="Jooj">
+      <h3>Jooj</h3>
+    </div>
+
+    <div class="membro">
+      <img src="images/zac.png" alt="Zac">
+      <h3>Zac</h3>
+    </div>
+
+    <div class="membro">
+      <img src="images/ziko.png" alt="Ziko">
+      <h3>Ziko</h3>
+    </div>
+
+    <div class="membro">
+      <img src="images/matheus.png" alt="Matheus">
+      <h3>Matheus</h3>
+    </div>
+
+    <div class="membro">
+      <img src="images/jonatas.png" alt="Jonatas">
+      <h3>Jonatas</h3>
+    </div>
+
+    <div class="membro">
+      <img src="images/big.png" alt="Big">
+      <h3>Big</h3>
+    </div>
+
+    <div class="membro" onclick="openPopup('Kashiz')">
+      <img src="images/kashiz.png" alt="Kashiz">
+      <h3>Kashiz</h3>
+    </div>
+
+  </section>
+  <div class="news-ticker">
+    <span>Novidades: Novo campeonato Call of Duty chegando! | PixelPulse atingiu 100 membros ativos! | Fique ligado nas lives ao vivo! |</span>
+  </div>
+
+  <!-- Popup -->
+  <div class="popup" id="popup">
+    <div class="popup-content" id="popup-content">
+      <h2 id="popup-title">TikTok</h2>
+      <a id="popup-link" href="#" target="_blank">Visitar TikTok</a><br>
+      <button class="close-btn" onclick="closePopup()">Fechar</button>
+    </div>
+  </div>
+
+  <script>
+    function openPopup(name) {
+      const popup = document.getElementById('popup');
+      const popupLink = document.getElementById('popup-link');
+      const popupTitle = document.getElementById('popup-title');
+      let link = "#";
+
+      if(name === "Wellington") {
+        link = "https://www.tiktok.com/@welingtonroberto54?_t=ZM-8vtP0wvnLyJ&_r=1";
+      } else if(name === "Kashiz") {
+        link = "https://www.tiktok.com/@171ip?_t=ZM-8vtOyomM7bL&_r=1";
+      }
+
+      popupTitle.innerText = "TikTok de " + name;
+      popupLink.href = link;
+      popup.style.display = "flex";
+    }
+
+    function closePopup() {
+      document.getElementById('popup').style.display = "none";
+    }
+  </script>
+</body>
+</html>
